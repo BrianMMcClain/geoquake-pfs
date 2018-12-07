@@ -4,7 +4,7 @@ require 'httparty'
 class GeoQuake < Sinatra::Base
 
     configure do
-        set :events_api, ENV["EVENTS_API"] || "http://localhost:8080"
+        set :events_api, ENV["EVENTS_API"] || "http://localhost:8081"
     end
 
     get '/' do
