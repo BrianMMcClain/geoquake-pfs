@@ -1,4 +1,4 @@
-var quakes_endpoint = "http://geocoder.default.dev.gswkbook.com";
+var quakes_endpoint = "/events";
 var mapTitles;
 var minimumMag = 0;
 
