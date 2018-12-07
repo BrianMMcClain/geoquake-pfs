@@ -30,6 +30,7 @@ $(document).ready(function() {
       var magnitude = response[i].mag;
       if(magnitude >= minimumMag) {
         var latLng = new google.maps.LatLng(response[i].lat,response[i].lon);
+        console.log(latLng);
         var image = {
           url: './images/earthquake.png',
           size: new google.maps.Size(20, 32),
@@ -50,8 +51,9 @@ $(document).ready(function() {
     console.log(response.length);
     for(let i = 0; i < response.length; i++){
       mapTitles = response[i].address
-      var magnitude = response[i].mag;
-      $('#info').append(`<p id=${magnitude}>  ${mapTitles} </p>`)
+      id = response[i].id
+      var magnitude = parseFloat(response[i].mag).toFixed(2);
+      $('#info').append(`<p id=${id}> (${magnitude}) ${mapTitles} </p>`)
     };
     initMap(response, minimumMag);
     console.log(response);
@@ -68,9 +70,10 @@ $(document).ready(function() {
     minimumMag = $(".mag").val();
     for(let i = 0; i < response.length; i++){
       mapTitles = response[i].address
-      var magnitude = response[i].mag;
+      id = response[i].id
+      var magnitude = parseFloat(response[i].mag).toFixed(2);
       if(magnitude >= minimumMag) {
-        $('#info').append(`<p id=${magnitude}> ${mapTitles} </p>`)
+        $('#info').append(`<p id=${id}> (${magnitude}) ${mapTitles} </p>`)
       };
     };
     initMap(response, minimumMag);
