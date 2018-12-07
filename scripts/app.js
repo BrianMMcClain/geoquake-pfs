@@ -49,7 +49,7 @@ $(document).ready(function() {
   function mapSuccess(response) {
     console.log(response.length);
     for(let i = 0; i < response.length; i++){
-      mapTitles = JSON.parse(response[i].address).address
+      mapTitles = response[i].address
       var magnitude = response[i].mag;
       $('#info').append(`<p id=${magnitude}>  ${mapTitles} </p>`)
     };
@@ -67,7 +67,7 @@ $(document).ready(function() {
     $("#info").empty();
     minimumMag = $(".mag").val();
     for(let i = 0; i < response.length; i++){
-      mapTitles = JSON.parse(response[i].address).address
+      mapTitles = response[i].address
       var magnitude = response[i].mag;
       if(magnitude >= minimumMag) {
         $('#info').append(`<p id=${magnitude}> ${mapTitles} </p>`)
