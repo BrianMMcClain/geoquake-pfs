@@ -20,6 +20,15 @@ $(document).ready(function() {
     });
   });
 
+  // Sort by magnitude
+  function sortEvents(response) {
+     var sorted = response.sort(function(a, b) {
+       return (a.mag > b.mag) ? -1 : ((b.mag > a.mag) ? 1 : 0)
+     });
+
+     return sorted;
+  }
+
   function initMap(response, minimumMag) {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.78, lng: -122.44},
@@ -30,7 +39,6 @@ $(document).ready(function() {
       var magnitude = response[i].mag;
       if(magnitude >= minimumMag) {
         var latLng = new google.maps.LatLng(response[i].lat,response[i].lon);
-        console.log(latLng);
         var image = {
           url: './images/earthquake.png',
           size: new google.maps.Size(20, 32),
@@ -49,6 +57,7 @@ $(document).ready(function() {
 
   function mapSuccess(response) {
     console.log(response.length);
+    response = sortEvents(response);
     for(let i = 0; i < response.length; i++){
       mapTitles = response[i].address
       id = response[i].id
@@ -66,6 +75,7 @@ $(document).ready(function() {
   };
 
   function remap(response) {
+    response = sortEvents(response);
     $("#info").empty();
     minimumMag = $(".mag").val();
     for(let i = 0; i < response.length; i++){
